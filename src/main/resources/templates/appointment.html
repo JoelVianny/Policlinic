@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       >
+<head th:replace="fragments :: html_head">
+
+</head>
+
+
+<body>
+<div th:replace=" fragments :: nav_bar"/>
+
+<div >
+    <section class="section-padding" id="booking">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-12 mx-auto">
+                    <div class="booking-form">
+
+                        <h2 class="text-center mb-lg-3 mb-2">Book an appointment</h2>
+
+                        <form role="form" th:action="@{/appointment}" method="POST" th:object="${appointment}">
+                            <div th:if="${#fields.hasErrors()}">
+        <span class="validationError">
+        Please correct the problems below and resubmit.
+        </span>
+                            </div>
+                            <div class="row" >
+
+                                <div class="col-lg-6 col-12">
+
+                                    <input type="text" th:field="*{name}"    class="form-control" >
+                                    <span class="validationError"  th:if="${#fields.hasErrors('name')}"
+                                          th:errors="*{name}"> Name Error</span>
+
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <input type="text"   th:field="*{surname}"  class="form-control" >
+                                    <span class="validationError"  th:if="${#fields.hasErrors('surname')}"
+                                          th:errors="*{surname}"> Surname Error</span>
+
+                                </div>
+
+                                <div class="col-lg-6 col-12">
+                                    <input type="email"   th:field="*{email}"  class="form-control"  >
+                                    <span class="validationError"  th:if="${#fields.hasErrors('email')}"
+                                          th:errors="*{email}"> Email Error</span>
+
+                                </div>
+
+                                <div class="col-lg-6 col-12">
+                                    <input type="telephone"  th:field="*{telephone}"   class="form-control" >
+                                    <span class="validationError"  th:if="${#fields.hasErrors('Telephone')}"
+                                          th:errors="*{telephone}"> Telephone Error</span>
+
+                                </div>
+
+                                <div class="col-lg-6 col-12">
+                                    <input type="date"   th:field="*{date}"  class="form-control">
+                                    <span class="validationError"  th:if="${#fields.hasErrors('date')}"
+                                          th:errors="*{date}"> Date Error</span>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Service</label>
+                                    <select class="form-control">
+                                        <option th:each="service : ${services}"
+                                                                         th:value="${service.serviceId}"
+                                                                         th:text="${service.serviceName}">
+                                    </option>
+                                    </select>
+<!--                                    <input type=""   th:field="*{service}" name="date" id="service" value="" class="form-control">-->
+
+                                </div>
+
+                                <div class="col-12">
+                                    <textarea class="form-control"  th:field="*{message}" rows="5"  placeholder="Additional Message"></textarea>
+                                    <span class="validationError"  th:if="${#fields.hasErrors('message')}"
+                                          th:errors="*{message}"> Message Error</span>
+
+                                </div>
+
+                                <div class="col-lg-3 col-md-4 col-6 mx-auto">
+                                    <button type="submit" class="form-control" id="submit-button">Appoint Now</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

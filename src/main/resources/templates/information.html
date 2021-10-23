@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html
+         xmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head"/>
+
+
+<body>
+<div th:replace=" fragments :: nav_bar"/>
+
+<div th:fragment=" book">
+
+    <section class="section-padding" id="booking">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-12 mx-auto">
+                    <div class="booking-form">
+
+                        <h4 class="text-center mb-lg-3 mb-2">Book an appointment</h4>
+
+                        <form  method="POST" th:object="${information}">
+<span class="validationError"
+      th:if="${#fields.hasErrors('questions')}"
+      th:errors="*{questions}">Questions Error</span>
+                            <div class="row">
+
+                                <div class="col-lg-6 col-12" id="medicines" >
+
+                                    <h4> Did you take any medicine </h4>
+                                    <div th:each="question: ${medicine}">
+                                        <input  name="questions" type="checkbox" th:value="${question.id}" class="form-check-input" >
+                                        <span th:text="${question.name}">MEDICINE</span><br/>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-12" id="operations" >
+
+                                    <h4>Have you had an operation ???</h4>
+                                    <div th:each="question: ${operation}">
+                                        <input  name="questions" type="checkbox" th:value="${question.id}" class="form-check-input" >
+                                        <span th:text="${question.name}">OPERATION</span><br/>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-12" id="allergies" >
+
+                                    <h4>Do you have any an allergy ??</h4>
+                                    <div th:each="question: ${allergy}">
+                                        <input  name="questions" type="checkbox" th:value="${question.id}" class="form-check-input" >
+                                        <span th:text="${question.name}">ALLERGY</span><br/>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-12" id="vitamins" >
+
+                                    <p class="font-weight-bold">Do you take any vitamin??? </p>
+                                    <div th:each="question: ${vitamin}">
+                                        <input  name="questions" type="checkbox" th:value="${question.id}" class="form-check-input" >
+                                        <span th:text="${question.name}">MEDICINE</span><br/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12" id="spychologicalantecedants" >
+
+                                    <h4>do you have a psychiatric history?? </h4>
+                                    <div th:each="question: ${spychologicalantecedant}">
+                                        <input  name="questions" type="checkbox" th:value="${question.id}" class="form-check-input" >
+                                        <span th:text="${question.name}">MEDICINE</span><br/>
+                                    </div>
+                                </div>
+
+                                div class="col-12">
+                                <textarea class="form-control" rows="5"   th:field="*{name}" placeholder="Additional Message"></textarea>
+
+                            </div>
+                                <span th:text="${#fields.hasErrors('name')}">XXX</span>
+                                <span class="validationError"
+                                      th:if="${#fields.hasErrors('name')}"
+                                      th:errors="*{name}">Name Error</span>
+                                <!-- tag::all[] -->
+                                <br/>
+                                <div class="col-lg-3 col-md-4 col-6 mx-auto">
+                                    <button type="submit" class="form-control" id="submit-button">Book Now</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
